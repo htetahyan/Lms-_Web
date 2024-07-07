@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrance_tests', function (Blueprint $table) {
+        Schema::create('test_results', function (Blueprint $table) {
             $table->id();
-            $table->string('exam_type');
-            $table->string('exam_code');
-            $table->integer('total_questions_count');
-            $table->string('exam_name');
-            $table->longText('description');
-            $table->string('allowed_time');
+            $table->foreignId('entrance_test_id')->constrained('entrance_tests')->onDelete('cascade');
+            $table->integer('total_score');
+            $table->string('reference_number');
+            $table->foreignId('participant_id')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrance_tests');
+        Schema::dropIfExists('test_results');
     }
 };

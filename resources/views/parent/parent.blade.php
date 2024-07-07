@@ -18,6 +18,7 @@
                                 natus delectus fugiat.</p>
                             <div class="">
                                 <a href="" class="btn btn-muted">Post များ Lesson များကိုကြည့်ရန်</a>
+                                <a href="{{ route('exams') }}" class="btn btn-muted">Test Your Skill</a>
                             </div>
                         </div>
                     </div>
@@ -27,7 +28,7 @@
                 </div>
             </div>
             {{-- <div class=""></div> | <h5 class=""></h5> --}}
-            <div class="row mt-5 p-4">
+            {{-- <div class="row mt-5 p-4">
                 <h5 class="text-primary fw-bold">Your Students</h5>
                 <hr />
                 @if (count($students))
@@ -74,7 +75,7 @@
                 @else
                     <h3 class="text-danger">No students found!</h3>
                 @endif
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

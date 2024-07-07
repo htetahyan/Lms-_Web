@@ -13,21 +13,26 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('student_name');
-            $table->string('birthday');
-            $table->string('admission_id');
-            $table->string('father_name');
-            $table->string('father_nrc');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('student_code');
+            $table->string('class_id')->nullable();
+            $table->date('dob');
             $table->string('mother_name');
-            $table->string('mother_nrc');
-            $table->string('siblings')->nullable();
-            $table->integer('grade');
-            $table->longText('address');
+            $table->string('father_name');
+            $table->string('email')->nullable();
+            $table->integer('phone');
+            $table->date('enrollment_date');
+            $table->longText('student_image_url');
             $table->string('gender');
-            $table->integer('parent_code');
-            $table->string('status')->default('new');
-            $table->string('image')->nullable();
-            $table->string('phone');
+            $table->longText('address');
+            $table->string('class');
+            $table->string('section');
+            $table->string('password');
+            $table->string('type')->nullable();
+            $table->string('year')->nullable();
+            $table->string('month')->nullable();
+            $table->string('time')->nullable();
             $table->timestamps();
         });
     }

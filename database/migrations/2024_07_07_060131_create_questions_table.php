@@ -11,23 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrance_tests', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('exam_type');
-            $table->string('exam_code');
-            $table->integer('total_questions_count');
-            $table->string('exam_name');
-            $table->longText('description');
-            $table->string('allowed_time');
+            $table->foreignId('entrance_test_id')->constrained('entrance_tests')->onDelete('cascade');
+            $table->text('question_text');
+            $table->json('answer_list');
+            $table->string('correct_answer');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrance_tests');
+        Schema::dropIfExists('questions');
     }
 };

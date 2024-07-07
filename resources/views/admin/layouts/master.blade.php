@@ -135,6 +135,8 @@
                                         href="{{ route('admin#addStudentPage') }}">Add New Student</a></li>
                                 <li><a class="{{ Request::is('admin/student/grade') ? 'active' : '' }}"
                                         href="{{ route('admin#grade') }}">Grades</a></li>
+                                        <li><a class="{{ Request::is('admin/student/years') ? 'active' : '' }}"
+                                            href="{{ route('admin#yearsList') }}">Years</a></li>
 
 
                             </ul>
@@ -198,6 +200,26 @@
                                     <a
                                         class="{{ Request::is('admin/manage/add/page') ? 'active' : '' }}"href="{{ route('admin#addAdminPage') }}">Add
                                         New Admin</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="submenu {{ Request::is('admin/' . 'entrance-tests' . '*') ? 'active' : '' }}">
+                            <a href=""><i class="fas fa-pen-to-square"></i> <span> Entrance Tests</span> <span
+                                    class="menu-arrow"></span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a
+                                        class="{{ Request::is('admin/entrance-tests/list') ? 'active' : '' }}"href="{{ route('entrance-tests.list') }}">Entry Exams
+                                        List</a>
+                                </li>
+
+                                <li>
+                                    <a
+                                        class="{{ Request::is('admin/entrance-tests/add') ? 'active' : '' }}"href="{{ route('entrance-tests.add') }}">Add
+                                        New Entry Exam</a>
                                 </li>
                             </ul>
                         </li>

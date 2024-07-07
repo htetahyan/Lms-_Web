@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrance_tests', function (Blueprint $table) {
+        Schema::create('years', function (Blueprint $table) {
             $table->id();
-            $table->string('exam_type');
-            $table->string('exam_code');
-            $table->integer('total_questions_count');
-            $table->string('exam_name');
-            $table->longText('description');
-            $table->string('allowed_time');
+            $table->integer('year');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrance_tests');
+        Schema::dropIfExists('years');
     }
 };

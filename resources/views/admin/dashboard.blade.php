@@ -126,7 +126,7 @@
 
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-6 d-flex">
 
                 <div class="card flex-fill student-space comman-shadow">
@@ -255,7 +255,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> --}}
 
         <div class="row">
             <div class="col-xl-3 col-sm-6 col-12">

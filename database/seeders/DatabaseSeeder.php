@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Grade;
 use App\Models\Student;
+use App\Models\Year;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,22 +40,28 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('admin123')
         ]);
 
-        Grade::create([
-            'grade'=>1
-        ]);
-        Student::create([
-            'student_name'=>'Aung Aung',
-            'birthday'=>'07.08.2005',
-            'admission_id'=>345670,
-            'father_name'=> 'U Win',
-            'father_nrc'=>'၅/စကန(နိုင်)၁၅၀၂၈၄',
-            'mother_name'=>'Daw Su Su Lwin',
-            'mother_nrc'=> '၁၂/ကတန(နိုင်)၂၂၃၃၄၄၅',
-            'grade'=>11,
-            'address'=>'Yangon/Dagon Seikkan',
-            'parent_code'=>150284,
-            'phone'=>'09794023074',
-            'gender' => 'male',
-        ]);
+        // Grade::create([
+        //     'grade'=>1
+        // ]);
+
+        for($i = 0; $i < 12 ; $i++){
+            Year::create([
+                'year'=> $i
+            ]);
+        }
+        // Student::create([
+        //     'student_name'=>'Aung Aung',
+        //     'birthday'=>'07.08.2005',
+        //     'admission_id'=>345670,
+        //     'father_name'=> 'U Win',
+        //     'father_nrc'=>'၅/စကန(နိုင်)၁၅၀၂၈၄',
+        //     'mother_name'=>'Daw Su Su Lwin',
+        //     'mother_nrc'=> '၁၂/ကတန(နိုင်)၂၂၃၃၄၄၅',
+        //     'grade'=>11,
+        //     'address'=>'Yangon/Dagon Seikkan',
+        //     'parent_code'=>150284,
+        //     'phone'=>'09794023074',
+        //     'gender' => 'male',
+        // ]);
     }
 }

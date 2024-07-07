@@ -19,17 +19,17 @@ class DashboardController extends Controller
         $studentCount = Student::count();
         $parentCount = User::where('role','parent')->count();
         $adminCount = User::where('role','admin')->count();
-        $students = Student::select('grade')
-        ->orderBy('grade')
-        ->groupBy('grade')
-        ->select('grade',DB::raw('count(*) as total'))
+        $students = Student::select('year')
+        ->orderBy('year')
+        ->groupBy('year')
+        ->select('year',DB::raw('count(*) as total'))
         ->get();
         // Students with grade chart
         // grade array
         $chartGrade = [];
         $studentArray = [];
         foreach($students as $s){
-            $chartGrade[] = "Grade ".$s->grade;
+            $chartGrade[] = "Year ".$s->grade;
             $studentArray[] = $s->total;
         }
 
@@ -51,13 +51,13 @@ class DashboardController extends Controller
         }
 
 
-        // recent added parent
-        $latestParents = User::where('role','parent')
-        ->leftJoin('students', 'users.parent_code', 'students.parent_code')
-        ->select('users.id','users.username','users.created_at','users.parent_code','users.phone','users.address','students.parent_code as s_parentCode')
-        ->latest('created_at')->take(5)->get();
+        // // recent added parent
+        // $latestParents = User::where('role','parent')
+        // ->leftJoin('students', 'users.parent_code', 'students.parent_code')
+        // ->select('users.id','users.username','users.created_at','users.parent_code','users.phone','users.address','students.student_CODE as s_parentCode')
+        // ->latest('created_at')->take(5)->get();
 
-        return view('admin.dashboard',compact('studentCount','parentCount','postCount','latestParents','horizontal','vertical','chartGrade','studentArray','adminCount'));
+        return view('admin.dashboard',compact('studentCount','parentCount','postCount','horizontal','vertical','chartGrade','studentArray','adminCount'));
     }
 
     // charts on change

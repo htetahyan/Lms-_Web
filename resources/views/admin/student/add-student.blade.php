@@ -33,12 +33,23 @@
                                 </div>
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Student Name <span class="login-danger">*</span>
-                                            @error('studentName')
+                                        <label>First Name <span class="login-danger">*</span>
+                                            @error('firstName')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" value="{{ old('studentName') }}" name="studentName"
+                                        <input class="form-control" value="{{ old('firstName') }}" name="firstName"
+                                            type="text" placeholder="Enter Student's Name">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Last Name <span class="login-danger">*</span>
+                                            @error('lastName')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                        <input class="form-control" value="{{ old('lastName') }}" name="firstName"
                                             type="text" placeholder="Enter Student's Name">
                                     </div>
                                 </div>
@@ -69,12 +80,12 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Parent Code <span class="login-danger">*</span>
-                                            @error('parentCode')
+                                        <label>Student Code <span class="login-danger">*</span>
+                                            @error('studentCode')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" value="{{ old('parentCode') }}" name="parentCode"
+                                        <input class="form-control" value="{{ old('studentCode') }}" name="studentCode"
                                             type="number" placeholder="Enter Parent Code">
                                     </div>
                                 </div>
@@ -94,30 +105,32 @@
                                             </option>
                                             <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female
                                             </option>
+                                            <option value="unidentified" {{ old('gender') == 'unidentified' ? 'selected' : '' }}>Unidentified
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Father's NRC <span class="login-danger">*</span>
-                                            @error('fatherNrc')
+                                        <label>Student Code <span class="login-danger">*</span>
+                                            @error('studentCode')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" name="fatherNrc" value="{{ old('fatherNrc') }}"
+                                        <input class="form-control" name="studentCode" value="{{ old('studentCode') }}"
                                             type="text" placeholder="Enter NRC ">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Mother's NRC<span class="login-danger">*</span>
-                                            @error('motherNrc')
+                                        <label>Email<span class="login-danger">*</span>
+                                            @error('email')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" name="motherNrc" value="{{ old('motherNrc') }}"
+                                        <input class="form-control" name="email" value="{{ old('email') }}"
                                             type="text" placeholder="Enter NRC ">
                                     </div>
                                 </div>
@@ -125,24 +138,24 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Date Of Birth <span class="login-danger">*</span>
-                                            @error('birthday')
+                                            @error('dateOfBirth')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input placehodler="dd-mm-yyyy" value="{{ old('birthday') }}" type="date"
-                                            class="form-control" name="birthday">
+                                        <input placehodler="dd-mm-yyyy" value="{{ old('dateOfBirth') }}" type="date"
+                                            class="form-control" name="dateOfBirth">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Grade<span class="login-danger">*</span>
-                                            @error('grade')
+                                        <label>Class Id<span class="login-danger">*</span>
+                                            @error('classId')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <select class="form-control select" name="grade" value="{{ old('grade') }}">
-                                            <option value="">Select Grade</option>
+                                        <select class="form-control select" name="classId" value="{{ old('classId') }}">
+                                            <option value="">Select Class Id</option>
                                             @foreach ($grades as $grade)
                                                 <option value="{{ $grade->grade }}">
                                                     @if ($grade->grade == 0)
@@ -158,20 +171,6 @@
 
 
 
-
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>ကျောင်းဝင်အမှတ်<span class="login-danger">*</span>
-                                            @error('admissionId')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </label>
-                                        <input class="form-control" value="{{ old('admissionId') }}" name="admissionId"
-                                            type="number" placeholder="Enter Admission ID">
-                                    </div>
-                                </div>
-
-
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Address
@@ -184,19 +183,9 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>ညီအစ်ကိုမောင်နှမ</label>
-                                        <textarea name="broSis" id="" cols="30" rows="10" class="form-control"
-                                            placeholder="ကျောင်းတွင်တက်ရောက်နေသော မွေးချင်း">{{ old('broSis') }}</textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-
-                                        <label>Contactable Phone Number <span class="login-danger">*</span>
+                                       <label>Contactable Phone Number <span class="login-danger">*</span>
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -216,15 +205,43 @@
                                     </div>
                                 </div>
 
-
-                                <div class="col-12">
-                                    <div class="student-submit">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('admin#parentsList') }}" class="btn btn-danger">Find Parent
-                                            Code</a>
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Year<span class="login-danger">*</span>
+                                            @error('year')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                        <input class="form-control" name="year" value="{{ old('year') }}"
+                                            type="text" placeholder="Enter NRC ">
                                     </div>
-
                                 </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Month<span class="login-danger">*</span>
+                                            @error('month')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                        <input class="form-control" name="month" value="{{ old('month') }}"
+                                            type="text" placeholder="Enter NRC ">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Time<span class="login-danger">*</span>
+                                            @error('time')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                        <input class="form-control" name="time" value="{{ old('time') }}"
+                                            type="text" placeholder="Enter NRC ">
+                                    </div>
+                                </div>
+
+
                             </div>
                         </form>
                     </div>
