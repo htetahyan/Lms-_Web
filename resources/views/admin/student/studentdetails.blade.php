@@ -27,9 +27,9 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
-                                <div class="profile-user-box">
-                                    <div class="profile-user-img">
-                                        @if ($student->student_image_uri)
+                                <div class="profile-user-box mt-2">
+                                    <div class="">
+                                        {{-- @if ($student->student_image_uri)
                                             <img src="{{ asset('storage/' . $student->student_image_uri) }}" alt="Profile">
                                         @else
                                             @if ($student->gender == 'male')
@@ -37,7 +37,8 @@
                                             @else
                                                 <img src="{{ asset('storage/unknown/female.png') }}" alt="Profile">
                                             @endif
-                                        @endif
+                                        @endif --}}
+                                        {{ $qrCode }}
 
                                         <div class="form-group students-up-files profile-edit-icon mb-0">
                                             <div class="uplod d-flex">
@@ -47,7 +48,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="names-profiles">
+                                    <div class="names-profiles ms-2">
                                         <h4 class="text-center">{{ $student->first_name . ' '.$student->last_name }}</h4>
                                         <h5 class="text-center"><span
                                                 class="badge badge-soft-success">{{ $student->status }}</span></h5>

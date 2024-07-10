@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Validator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
@@ -104,10 +105,15 @@ class StudentController extends Controller
             ->orderByRaw('DATE(exam_date)')
             ->orderBy('year_id')
             ->get();
+
+        $url =" http://localhost:8000/admin/student/details/" . $id;
+
+        $qrCode = QrCode::size(100)->generate($url);
+
         // ->groupBy('grade');
 
 
-        return view('admin.student.studentdetails', compact('student', 'comments', 'reportMarks'));
+        return view('admin.student.studentdetails', compact('student', 'comments', 'reportMarks','qrCode'));
     }
 
 
