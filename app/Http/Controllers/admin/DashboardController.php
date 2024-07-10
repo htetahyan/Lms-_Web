@@ -19,10 +19,10 @@ class DashboardController extends Controller
         $studentCount = Student::count();
         $parentCount = User::where('role','parent')->count();
         $adminCount = User::where('role','admin')->count();
-        $students = Student::select('year')
-        ->orderBy('year')
-        ->groupBy('year')
-        ->select('year',DB::raw('count(*) as total'))
+        $students = Student::select('year_id')
+        ->orderBy('year_id')
+        ->groupBy('year_id')
+        ->select('year_id',DB::raw('count(*) as total'))
         ->get();
         // Students with grade chart
         // grade array

@@ -13,7 +13,7 @@ class ExamController extends Controller
 {
     public function storeResultPage($id)
     {
-        $student = Student::where('id',$id)->select('id','grade','student_name')->first();
+        $student = Student::where('id',$id)->select('id','year_id','first_name','last_name','student_code','class_id')->with('year')->first();
         return view('admin.student.add-exam-result',compact('student'));
     }
 
@@ -63,7 +63,7 @@ class ExamController extends Controller
             'biology'=>$request->biology,
             'economy'=>$request->economy,
             'social'=>$request->social,
-            'grade'=>$request->grade,
+            'year_id'=>$request->yearId,
             'given_marks'=>$request->givenMarks,
             'exam_date'=>$request->examDate
         ];

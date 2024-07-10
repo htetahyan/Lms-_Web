@@ -22,6 +22,7 @@
             <div class="col-sm-12">
                 <div class="card comman-shadow  ">
                     <div class="card-body">
+
                         <form action="{{ route('admin#addStudent') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
@@ -49,7 +50,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" value="{{ old('lastName') }}" name="firstName"
+                                        <input class="form-control" value="{{ old('lastName') }}" name="lastName"
                                             type="text" placeholder="Enter Student's Name">
                                     </div>
                                 </div>
@@ -105,23 +106,14 @@
                                             </option>
                                             <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female
                                             </option>
-                                            <option value="unidentified" {{ old('gender') == 'unidentified' ? 'selected' : '' }}>Unidentified
+                                            <option value="unidentified"
+                                                {{ old('gender') == 'unidentified' ? 'selected' : '' }}>Unidentified
                                             </option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-sm-4">
-                                    <div class="form-group local-forms">
-                                        <label>Student Code <span class="login-danger">*</span>
-                                            @error('studentCode')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </label>
-                                        <input class="form-control" name="studentCode" value="{{ old('studentCode') }}"
-                                            type="text" placeholder="Enter NRC ">
-                                    </div>
-                                </div>
+
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
@@ -156,7 +148,7 @@
                                         </label>
                                         <select class="form-control select" name="classId" value="{{ old('classId') }}">
                                             <option value="">Select Class Id</option>
-                                            @foreach ($grades as $grade)
+                                            {{-- @foreach ($grades as $grade)
                                                 <option value="{{ $grade->grade }}">
                                                     @if ($grade->grade == 0)
                                                         KG
@@ -164,7 +156,33 @@
                                                         Grade-{{ $grade->grade }}
                                                     @endif
                                                 </option>
+                                            @endforeach --}}
+
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-4">
+                                    <div class="form-group local-forms">
+                                        <label>Year<span class="login-danger">*</span>
+                                            @error('yeatId')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                        <select class="form-control select" name="yearId" value="{{ old('yearId') }}">
+                                            <option value="">Select Year </option>
+                                            @foreach ($years as $year)
+                                                <option value="{{ $year->year }}">
+                                                    Year - {{ $year->year }}
+                                                </option>
                                             @endforeach
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -185,7 +203,7 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                       <label>Contactable Phone Number <span class="login-danger">*</span>
+                                        <label>Contactable Phone Number <span class="login-danger">*</span>
                                             @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -207,10 +225,8 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Year<span class="login-danger">*</span>
-                                            @error('year')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                        <label>Year
+
                                         </label>
                                         <input class="form-control" name="year" value="{{ old('year') }}"
                                             type="text" placeholder="Enter NRC ">
@@ -219,10 +235,8 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Month<span class="login-danger">*</span>
-                                            @error('month')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                        <label>Month
+
                                         </label>
                                         <input class="form-control" name="month" value="{{ old('month') }}"
                                             type="text" placeholder="Enter NRC ">
@@ -231,17 +245,15 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Time<span class="login-danger">*</span>
-                                            @error('time')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                        <label>Time<span class="login-danger"></span>
+
                                         </label>
                                         <input class="form-control" name="time" value="{{ old('time') }}"
                                             type="text" placeholder="Enter NRC ">
                                     </div>
                                 </div>
 
-
+                                <button class="btn btn-primary" type="submit">Save</button>
                             </div>
                         </form>
                     </div>

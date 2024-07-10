@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         //     'grade'=>1
         // ]);
 
-        for($i = 0; $i < 12 ; $i++){
+        for($i = 1; $i < 13 ; $i++){
             Year::create([
                 'year'=> $i
             ]);

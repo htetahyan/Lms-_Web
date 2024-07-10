@@ -115,10 +115,10 @@
                                     <form class="d-flex">
                                         <select class="form-select me-2" name="grade" id="gradeBox">
                                             <option value="" {{ request('grade') ? '' : 'selected' }}>All</option>
-                                            @foreach ($grades as $grade)
-                                                <option value="{{ $grade->grade }}"
-                                                    {{ request('grade') == $grade->grade && request('grade') != null ? 'selected' : '' }}>
-                                                    {{ $grade->grade == 0 ? 'KG' : 'Grade- ' . $grade->grade }}
+                                            @foreach ($years as $year)
+                                                <option value="{{ $year->year }}"
+                                                    {{ request('year') == $year->year && request('year') != null ? 'selected' : '' }}>
+                                                    {{ $year->year == 0 ? 'KG' : 'year- ' . $year->year }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -149,7 +149,7 @@
                                                         class="text-black ms-2">{{ count($students) }}</span>
                                                 </a>
                                             </th>
-                                            <th class="text-center">Parent Code</th>
+                                            <th class="text-center">Student Code</th>
                                             <th class="text-center">Student Name</th>
                                             <th class="text-center">Admission Id</th>
                                             <th class="text-center">Birthday</th>
@@ -171,9 +171,9 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center"> <span
-                                                        class="badge badge-soft-success ">{{ $student->parent_code }}</span>
+                                                        class="badge badge-soft-success ">{{ $student->student_code }}</span>
                                                     <span class="badge badge-soft-primary clipboard"
-                                                        onclick="copyToClipboard({{ json_encode($student->parent_code) }})">
+                                                        onclick="copyToClipboard({{ json_encode($student->student_code) }})">
                                                         <i class="fa-solid fa-clipboard"></i>
                                                     </span>
                                                 </td>
@@ -181,8 +181,8 @@
                                                 <td class="text-center">
                                                     <h2 class="table-avatar">
                                                         <a href="student-details.html" class="avatar avatar-sm me-2">
-                                                            @if ($student->image)
-                                                                <img class="avatar-img rounded-circle"src="{{ asset('storage/' . $student->image) }}"
+                                                            @if ($student->student_image_uri)
+                                                                <img class="avatar-img rounded-circle"src="{{ asset('storage/' . $student->student_image_uri) }}"
                                                                     alt="User Image">
                                                             @else
                                                                 @if ($student->gender == 'male')
@@ -197,18 +197,14 @@
                                                                 @endif
                                                             @endif
                                                             <a href="{{ route('admin#studentDetails', $student->id) }}"
-                                                                class="text-info">{{ $student->student_name }}</a>
+                                                                class="text-info">{{ $student->first_name . ' ' . $student->last_name }}</a>
                                                     </h2>
                                                 </td>
-                                                <td class="text-center">{{ $student->admission_id }}</td>
-                                                <td class="text-center">{{ $student->birthday }}</td>
+                                                <td class="text-center">{{ $student->class_id }}</td>
+                                                <td class="text-center">{{ $student->dob }}</td>
                                                 <td class="text-center">
                                                     <span class="badge badge-soft-success">
-                                                        @if ($student->grade == 0)
-                                                            KG
-                                                        @else
-                                                            {{ $student->grade }}
-                                                        @endif
+                                                      Year - {{ $student->year->year }}
                                                     </span>
                                                 </td>
                                                 <td class="text-center">{{ $student->father_name }}</td>

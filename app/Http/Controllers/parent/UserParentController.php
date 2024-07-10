@@ -6,12 +6,14 @@ use App\Models\Post;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Question;
+use Illuminate\Support\Facades\URL;
 use App\Models\PublicPost;
+use App\Models\TestResult;
 use App\Models\EntranceTest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\TestResult;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserParentController extends Controller
 {
@@ -85,8 +87,14 @@ class UserParentController extends Controller
 
     public function result($referenceNumber)
     {
+        $url = Url::current();
         $key = base64_decode($referenceNumber);
         $result = TestResult::where('reference_number',$key)->with('entranceTest')->first();
-        return view('entrance.result',compact('result'));
+
+        $qrCodes = [];
+        $qrCodes['simple'] =QrCode::size(150)->generate($url);
+
+
+        return view('entrance.result',$qrCodes,compact('result',));
     }
 }

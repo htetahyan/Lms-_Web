@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\admin\student;
 
 use Storage;
+use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\Year;
 use App\Models\Grade;
 use App\Models\Student;
-use App\Models\Post;
 use App\Models\Subject;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -22,6 +23,7 @@ class StudentController extends Controller
     public function studentsList()
     {
         $grades = Grade::orderBy('grade')->get();
+        $years = Year::orderBy('year')->get();
         $students = Student::when(request('key'), function ($searchQuery) {
             $searchQuery->where('admission_id', 'like', '%' . request('key') . '%');
         })
@@ -34,27 +36,28 @@ class StudentController extends Controller
             ->when(request('grade') || request('grade') == '0', function ($g) {
                 $g->where('grade', request('grade'));
             })
-            ->paginate(10);
-        return view('admin.student.students-list', compact('students', 'grades'));
+            ->with('year')->paginate(10);
+        return view('admin.student.students-list', compact('students', 'grades','years'));
     }
 
     //add student
     public function addStudentPage()
     {
         $grades = Grade::orderBy('grade')->get();
-        return view('admin.student.add-student', compact('grades'));
+        $years = Year::orderBy('year')->get();
+
+        return view('admin.student.add-student', compact('years'));
     }
 
     public function addStudent(Request $request)
     {
 
-        // // dd($request->toArray());
         $this->addstudentValidationCheck($request);
         $student = $this->requestStudentData($request);
         if ($request->hasFile('image')) {
             $imageName = uniqid() . $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public', $imageName);
-            $student['image'] = $imageName;
+            $student['student_image_uri'] = $imageName;
         }
         $student['new_status_expiry'] = Carbon::now()->addYear();
         Student::create($student);
@@ -77,7 +80,7 @@ class StudentController extends Controller
         if ($request->hasFile('image')) {
             $imageName = uniqid() . $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('public', $imageName);
-            $edittedStudentData['image'] = $imageName;
+            $edittedStudentData['student_image_uri'] = $imageName;
         }
         Student::where('id', $request->id)->update($edittedStudentData);
         toastr()->info('A student data has been updated admin!');
@@ -99,7 +102,7 @@ class StudentController extends Controller
         $comments = Post::where('student_id', $id)->get();
         $reportMarks = Subject::where('student_id', $id)
             ->orderByRaw('DATE(exam_date)')
-            ->orderBy('grade')
+            ->orderBy('year_id')
             ->get();
         // ->groupBy('grade');
 
@@ -115,19 +118,20 @@ class StudentController extends Controller
     private function addstudentValidationCheck($request)
     {
         $validationRule = [
-            'studentName' => 'required',
-            'birthday' => 'required',
-            'parentCode' => 'required',
+            'firstName' => 'required',
+            'lastName' => 'required',
             'fatherName' => 'required',
             'motherName' => 'required',
-            'fatherNrc' => 'required',
-            'motherNrc' => 'required',
-            'grade' => 'required',
-            'admissionId' => 'required',
+            'studentCode' => 'required',
+            'gender' => 'required',
+            'email' => 'required',
+            'dateOfBirth' => 'required',
+            'year' => 'required',
+            'classId' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'gender' => 'required',
-            'image' => 'mimes:jpg,png,webp'
+            'image' => 'mimes:jpg,png,webp',
+            'yearId' => 'required'
         ];
         Validator::make($request->all(), $validationRule)->validate();
     }
@@ -135,18 +139,18 @@ class StudentController extends Controller
     private function requestStudentData($request)
     {
         return [
-            'student_name' => $request->studentName,
-            'birthday' => $request->birthday,
-            'parent_code' => $request->parentCode,
+            'first_name' => $request->firstName,
+            'last_name' => $request->lastName,
+            'dob' => $request->dateOfBirth,
+            'student_code' => $request->studentCode,
             'father_name' => $request->fatherName,
             'mother_name' => $request->motherName,
-            'father_nrc' => $request->fatherNrc,
-            'mother_nrc' => $request->motherNrc,
-            'grade' => $request->grade,
-            'admission_id' => $request->admissionId,
+            'year' => $request->year,
+            'class_id' => $request->classId,
             'address' => $request->address,
-            'siblings' => $request->broSis,
             'phone' => $request->phone,
+            'email' => $request->email,
+            'year_id'=> $request->yearId,
             'gender' => $request->gender,
         ];
     }

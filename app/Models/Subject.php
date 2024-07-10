@@ -22,10 +22,10 @@ class Subject extends Model
         'biology',
         'social',
         'given_marks',
-        'grade',
+        'year_id',
         'exam_date',
         'economy'
     ];
 
-   
+
 }

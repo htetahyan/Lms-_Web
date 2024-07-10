@@ -29,8 +29,8 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="profile-user-box">
                                     <div class="profile-user-img">
-                                        @if ($student->image)
-                                            <img src="{{ asset('storage/' . $student->image) }}" alt="Profile">
+                                        @if ($student->student_image_uri)
+                                            <img src="{{ asset('storage/' . $student->student_image_uri) }}" alt="Profile">
                                         @else
                                             @if ($student->gender == 'male')
                                                 <img src="{{ asset('storage/unknown/male.jpg') }}" alt="Profile">
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                     <div class="names-profiles">
-                                        <h4 class="text-center">{{ $student->student_name }}</h4>
+                                        <h4 class="text-center">{{ $student->first_name . ' '.$student->last_name }}</h4>
                                         <h5 class="text-center"><span
                                                 class="badge badge-soft-success">{{ $student->status }}</span></h5>
                                     </div>
@@ -57,18 +57,18 @@
                             <div class="col-lg-4 col-md-4 d-flex align-items-center">
                                 <div class="follow-group">
                                     <div class="students-follows">
-                                        <h5 class="text-center">Grade</h5>
-                                        <h4 class="text-center">{{ $student->grade }}</h4>
+                                        <h5 class="text-center">Year</h5>
+                                        <h4 class="text-center">{{ $student->year->year }}</h4>
                                     </div>
                                     <div class="students-follows">
-                                        <h5 class="text-center">ကျောင်းဝင်အမှတ်</h5>
-                                        <h4 class="text-center">{{ $student->admission_id }}</h4>
+                                        <h5 class="text-center">Student Code</h5>
+                                        <h4 class="text-center">{{ $student->student_code }}</h4>
                                     </div>
                                     <div class="students-follows">
-                                        <h5>Parent Code</h5>
-                                        <h6><span class="badge badge-soft-success ">{{ $student->parent_code }}</span>
+                                        <h5>Student Code </h5>
+                                        <h6><span class="badge badge-soft-success ">{{ $student->student_code }}</span>
                                             <span class="badge badge-soft-success clipboard"
-                                                onclick="copyToClipboard({{ json_encode($student->parent_code) }})">
+                                                onclick="copyToClipboard({{ json_encode($student->student_code) }})">
                                                 <i class="fa-solid fa-clipboard"></i>
                                             </span>
                                         </h6>
@@ -266,8 +266,8 @@
                                                 <i class="feather-user"></i>
                                             </div>
                                             <div class="views-personal">
-                                                <h4>အဖမှတ်ပုံတင်</h4>
-                                                <h5>{{ $student->father_nrc }}</h5>
+                                                <h4>Father Name</h4>
+                                                <h5>{{ $student->father_name }}</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity">
@@ -276,8 +276,8 @@
                                                     alt="">
                                             </div>
                                             <div class="views-personal">
-                                                <h4>Current Grade</h4>
-                                                <h5>{{ $student->grade }}</h5>
+                                                <h4>Current Year</h4>
+                                                <h5>{{ $student->year->year }}</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity">
@@ -296,7 +296,7 @@
                                             <div class="views-personal">
                                                 <h4>Email</h4>
                                                 <h5><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                                        data-cfemail="81e5e0e8f2f8c1e6ece0e8edafe2eeec">[email&#160;protected]</a>
+                                                        >{{ $student->email }}</a>
                                                 </h5>
                                             </div>
                                         </div>
@@ -315,7 +315,7 @@
                                             </div>
                                             <div class="views-personal">
                                                 <h4>Date of Birth</h4>
-                                                <h5>{{ $student->birthday }}</h5>
+                                                <h5>{{ $student->dob }}</h5>
                                             </div>
                                         </div>
                                         <div class="personal-activity">
@@ -347,15 +347,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="personal-activity mb-0">
-                                            <div class="personal-icons">
-                                                <i class="feather-map-pin"></i>
-                                            </div>
-                                            <div class="views-personal">
-                                                <h4>Address</h4>
-                                                <h5>{{ $student->address }}</h5>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

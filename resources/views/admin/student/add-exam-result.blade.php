@@ -19,7 +19,7 @@
 
         <div class="row ">
             <div class="col-sm-12">
-                <div class="card comman-shadow  ">
+                <div class="card comman-shadow">
                     <div class="card-body">
                         <form action="{{ route('admin#storeExamResult') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -32,7 +32,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Given Marks <span class="login-danger">*</span>
-                                           
+
                                         </label>
                                         <select class="form-control select" name="givenMarks">
                                             <option value="">Select Given Marks</option>
@@ -60,18 +60,18 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Grade<span class="login-danger">*</span>
-                                           
+                                        <label>Year<span class="login-danger">*</span>
+
                                         </label>
-                                        <input class="form-control" value="{{$student->grade }}"  disabled>
-                                        <input type="hidden" value="{{$student->grade}}" name="grade">
+                                        <input class="form-control" value="{{$student->year->year }}"  disabled>
+                                        <input type="hidden" value="{{$student->year->year}}" name="yearId">
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Myanmar<span class="login-danger">*</span>
-                                           
+
                                         </label>
                                         <input class="form-control" value="{{ old('myanmar') }}" name="myanmar"
                                             type="number">
@@ -81,7 +81,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>English<span class="login-danger">*</span>
-                                           
+
                                         </label>
                                         <input class="form-control" value="{{ old('english') }}" name="english"
                                             type="number">
@@ -152,7 +152,7 @@
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                         <label>Geography<span class="login-danger">*</span>
-                                           
+
                                         </label>
                                         <input class="form-control" value="{{ old('geography') }}" name="geography"
                                             type="number">
@@ -166,16 +166,16 @@
                                         <input class="form-control" value="{{ old('history') }}" name="history"
                                             type="number">
                                     </div>
-                                </div> 
+                                </div>
 
-                              
-                                
+
+
                             </div>
                             <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
                                        <button class="btn btn-primary" type="submit">Submit</button>
                                     </div>
-                            </div> 
+                            </div>
                         </form>
                     </div>
                 </div>

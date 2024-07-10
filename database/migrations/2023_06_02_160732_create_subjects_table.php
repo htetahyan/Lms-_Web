@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('social')->nullable();
             $table->string('exam_date')->nullable();
             $table->string('exam_description')->nullable();
-            $table->integer('grade');
+            $table->integer('year_id');
             $table->integer('given_marks');
             $table->timestamps();
         });

@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->integer('phone');
             $table->date('enrollment_date');
-            $table->longText('student_image_url');
+            $table->longText('student_image_uri');
             $table->string('gender');
             $table->longText('address');
             $table->string('class');
             $table->string('section');
             $table->string('password');
+            $table->foreignId('year_id')->constrained('years')->onDelete('cascade');
             $table->string('type')->nullable();
-            $table->string('year')->nullable();
             $table->string('month')->nullable();
             $table->string('time')->nullable();
             $table->timestamps();
