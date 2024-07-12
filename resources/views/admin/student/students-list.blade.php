@@ -24,7 +24,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="form-group">
                             <input type="text" name="key" value="{{ request('key') }}" class="form-control"
-                                placeholder="Search by ID ...">
+                                placeholder="Search by Student Code ...">
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -36,7 +36,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="form-group">
                             <input type="text" class="form-control" value="{{ request('phone') }}" name="phone"
-                                placeholder="Search by Parent Code ...">
+                                placeholder="Search by Phone Number ...">
                         </div>
                     </div>
                     <div class="col-lg-2">

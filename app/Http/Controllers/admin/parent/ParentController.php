@@ -16,37 +16,44 @@ class ParentController extends Controller
     // parent list page
     public function parentsList()
     {
-        $parentWithStudentCode = DB::table('users')
-        ->join('students', 'users.parent_code', 'students.parent_code')
-        ->count();
-        $parents = User::where('role','parent')
-        ->leftJoin('students', 'users.parent_code', 'students.parent_code')
-        ->select('users.*','students.parent_code as s_parentCode')
-        ->when(request('name'),function($searchQuery){
-            $searchQuery->where('users.username','like','%'.request('name').'%');
-        })
-        ->when(request('nrc'),function($name){
-            $name->where('users.nrc','like','%'.request('nrc').'%');
-        })
-        ->when(request('parentCode'),function($parentCode){
-            $parentCode->where('users.parent_code','like','%'.request('parentCode').'%');
-        })
-        ->when(request('status') || request('status') == 0,function($status){
-            $status->where('users.status','like','%'.request('status').'%');
-        })
-        ->paginate(10);
-        // dd($parents->toArray());
-        return view('admin.parent.parents-list',compact('parents','parentWithStudentCode'));
+        $parents = User::where('role', 'parent')
+            ->with('students')
+            ->when(request('name'), function($searchQuery) {
+                $searchQuery->where('users.username', 'like', '%' . request('name') . '%');
+            })
+            ->when(request('nrc'), function($name) {
+                $name->where('users.nrc', 'like', '%' . request('nrc') . '%');
+            })
+            ->when(request('studentCode'), function($studentCode) {
+                $studentCode->where('users.student_code', 'like', '%' . request('studentCode') . '%');
+            })
+            ->when(request('status') !== null, function($status) {
+                $status->where('users.status', 'like', '%' . request('status') . '%');
+            })
+            ->whereHas('students')
+            ->paginate();
+
+        return view('admin.parent.parents-list', compact('parents'));
     }
 
       // parents without student
     public function parentsWithoutStudent()
     {
-        $parentWithoutStudentCode = DB::table('users')
-        ->select('users.*','students.parent_code as s_parentCode')
-        ->leftJoin('students', 'users.parent_code', 'students.parent_code')
-        ->where('users.role','parent')
-        ->whereNull('students.parent_code')
+        $parentWithoutStudentCode = User::where('role', 'parent')
+        ->with('students')
+        ->when(request('name'), function($searchQuery) {
+            $searchQuery->where('users.username', 'like', '%' . request('name') . '%');
+        })
+        ->when(request('nrc'), function($name) {
+            $name->where('users.nrc', 'like', '%' . request('nrc') . '%');
+        })
+        ->when(request('studentCode'), function($studentCode) {
+            $studentCode->where('users.student_code', 'like', '%' . request('studentCode') . '%');
+        })
+        ->when(request('status') !== null, function($status) {
+            $status->where('users.status', 'like', '%' . request('status') . '%');
+        })
+        ->doesntHave('students')  // This will filter users who do not have related students
         ->paginate(10);
         return view('admin.parent.nostudentparent',compact('parentWithoutStudentCode'));
     }
@@ -82,11 +89,12 @@ class ParentController extends Controller
       // parent deatails
     public function parentDetails($id)
     {
-        $parent = User::select('users.*','students.parent_code as s_parentCode')
-        ->leftJoin('students', 'users.parent_code', 'students.parent_code')
-        ->where('users.id',$id)->first();
-        $students = Student::where('parent_code',$parent->parent_code)->orderBy('grade')->get();
-        return view('admin.parent.parent-details',compact('parent','students'));
+        // $parent = User::select('users.*','students.student_code as s_parentCode')
+        // ->leftJoin('students', 'users.student_code', 'students.student_code')
+        // ->where('users.id',$id)->first();
+        $parent = User::where('id',$id)->with('students')->first();
+        // $students = Student::where('student_code',$parent->student_code)->orderBy('created_at')->get();
+        return view('admin.parent.parent-details',compact('parent'));
     }
 
       // edit parent data
@@ -127,7 +135,7 @@ class ParentController extends Controller
         return [
             'username'=>$request->username,
             'email'=>$request->email,
-            'parent_code'=>$request->parentCode,
+            'student_code'=>$request->studentCode,
             'nrc'=>$request->nrc,
             'phone'=>$request->phone,
             'gender'=>$request->gender,
@@ -142,7 +150,7 @@ class ParentController extends Controller
         $validationRule = [
             'username'=> 'required',
             'email'=>'required',
-            'parentCode'=>'required',
+            'studentCode'=>'required',
             'nrc'=>'required',
             'phone'=>'required',
             'address'=>'required',

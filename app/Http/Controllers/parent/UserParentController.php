@@ -19,14 +19,14 @@ class UserParentController extends Controller
 {
     public function home()
     {
-        // $students = Student::where('parent_code',Auth::user()->parent_code)->get();
+        $students = Student::where('student_code',Auth::user()->student_code)->get();
         $posts = PublicPost::where('viewer_type','!=','admin')->get();
-        return view('parent.parent');
+        return view('parent.parent',compact('students'));
     }
 
     public function showStudent()
     {
-        $students = Student::where('parent_code',Auth::user()->parent_code)->get();
+        $students = Student::where('student_code',Auth::user()->student_code)->get();
         return view('parent.about-student',compact('students'));
     }
 

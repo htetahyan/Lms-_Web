@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'role'=>'parent',
             'nrc'=>'၅/စကန(နိုင်)၁၅၀၂၈၄',
             'gender'=>'male',
-            'parent_code'=> 150284,
             'password'=>Hash::make('admin123')
         ]);
 

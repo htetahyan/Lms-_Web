@@ -69,13 +69,13 @@
 
                                 <div class="col-12 col-sm-4">
                                     <div class="form-group local-forms">
-                                        <label>Parent Code <span class="login-danger">*</span>
-                                            @error('parentCode')
+                                        <label>Student Code <span class="login-danger">*</span>
+                                            @error('studentCode')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </label>
-                                        <input class="form-control" value="{{ old('parentCode') }}" name="parentCode"
-                                            type="number" placeholder="မှတ်ပုံတင်နောက်ဆုံးဂဏန်းများကိုထည့်ပါ">
+                                        <input class="form-control" value="{{ old('studentCode') }}" name="studentCode"
+                                            type="text" placeholder="Student Code">
                                     </div>
                                 </div>
 

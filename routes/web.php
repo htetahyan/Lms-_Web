@@ -46,7 +46,7 @@ Route::middleware(['auth','cors'])->group(function () { //overall middleware
 
             Route::prefix('admin')->group(function(){
                 Route::get('dashboard',[DashboardController::class,'adminDashboard'])->name('admin#dashboard');
-                Route::get('dashboard/statitics',[DashboardController::class,'dashboardSt0000000003..333333atitics']);
+                Route::get('dashboard/statitics',[DashboardController::class,'dashboardStatistics']);
                 Route::post('comment',[CommunityController::class,'comment'])->name('admin#comment');
                 Route::get('deletecomment/{id}',[CommunityController::class,'deleteComment'])->name('admin#deleteComment');
                 Route::post('add/grade',[AdminController::class,'addGrade'])->name('admin#addGrade');   //add grades to students

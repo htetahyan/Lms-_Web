@@ -26,16 +26,16 @@ class StudentController extends Controller
         $grades = Grade::orderBy('grade')->get();
         $years = Year::orderBy('year')->get();
         $students = Student::when(request('key'), function ($searchQuery) {
-            $searchQuery->where('admission_id', 'like', '%' . request('key') . '%');
+            $searchQuery->where('studentCode', 'like', '%' . request('key') . '%');
         })
             ->when(request('studentName'), function ($name) {
                 $name->where('student_name', 'like', '%' . request('studentName') . '%');
             })
             ->when(request('phone'), function ($phone) {
-                $phone->where('parent_code', 'like', '%' . request('phone') . '%');
+                $phone->where('phone', 'like', '%' . request('phone') . '%');
             })
-            ->when(request('grade') || request('grade') == '0', function ($g) {
-                $g->where('grade', request('grade'));
+            ->when(request('year') || request('year') == '0', function ($g) {
+                $g->where('year', request('year'));
             })
             ->with('year')->paginate(10);
         return view('admin.student.students-list', compact('students', 'grades','years'));

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');//3
             $table->longText('address');//4
-            $table->integer('parent_code');//5
+            $table->string('student_code')->nullable();//5
             $table->string('role')->default('parent');
             $table->string('gender');
             $table->string('image')->nullable();

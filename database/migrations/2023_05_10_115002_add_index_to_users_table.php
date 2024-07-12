@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->index(['id','username', 'parent_code','status']);
+            $table->index(['id','username','status']);
         });
     }
     /**

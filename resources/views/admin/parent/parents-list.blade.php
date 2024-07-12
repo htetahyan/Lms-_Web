@@ -36,8 +36,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{ request('parentCode') }}" name="parentCode"
-                                placeholder="Search by Parent Code ...">
+                            <input type="text" class="form-control" value="{{ request('studentCode') }}" name="studentCode"
+                                placeholder="Search by Student Code ...">
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -63,7 +63,7 @@
                                                 class="fa-solid fa-users"></i>
                                             {{ $parents->total() }}</span>
                                     </h3>
-                                    @if ($parentWithStudentCode)
+                                    {{-- @if ($parentWithStudentCode)
                                         <div class="alert alert-danger mt-2">
                                             <a class="text-danger" href="{{ route('admin#noStudentParents') }}">
                                                 Parents without Students -
@@ -77,7 +77,7 @@
                                                 {{ $parentWithStudentCode }}
                                             </a>
                                         </div>
-                                    @endif
+                                    @endif --}}
 
                                     <form class="d-flex">
                                         <select class="form-select me-2" name="status" id="gradeBox">
@@ -116,7 +116,7 @@
                                                 </a>
                                             </th>
                                             <th class="text-center">Name</th>
-                                            <th class="text-center">Parent Code</th>
+                                            <th class="text-center">Total Students</th>
                                             <th class="text-center">NRC</th>
                                             <th class="text-center">Mobile Number</th>
                                             <th class="text-center">Address</th>
@@ -154,12 +154,14 @@
                                                                 class="text-info">{{ $parent->username }}</a>
                                                     </h2>
                                                 </td>
-                                                <td class="text-center"><span
-                                                        class="badge code {{ $parent->parent_code == $parent->s_parentCode ? 'badge-soft-success' : 'badge-soft-danger' }}">{{ $parent->parent_code }}</span>
-                                                    <span class="badge badge-soft-primary clipboard"
-                                                        onclick="copyToClipboard({{ json_encode($parent->parent_code) }})">
-                                                        <i class="fa-solid fa-clipboard"></i>
-                                                    </span>
+                                                <td class="text-center">
+                                                    @if ($parent->students->count()> 0)
+                                                    <span class="badge code badge-soft-success">{{ $parent->students->count() }}</span>
+
+                                                    @else
+                                                    <span class="badge code badge-soft-danger">{{ 0 }}</span>
+
+                                                    @endif
                                                 </td>
                                                 <td class="text-center">{{ $parent->nrc }}</td>
                                                 <td class="text-center">{{ $parent->phone }}</td>
@@ -197,8 +199,8 @@
             </div>
         </div>
     @endsection
-    @section('myScript')
-        {{-- <script>
+    {{-- @section('myScript')
+        <script>
             $(document).ready(function() {
                 setInterval(function() {
                     $('tr[data-user-id]').each(function() {
@@ -221,5 +223,5 @@
                     });
                 }, 1000);
             });
-        </script> --}}
-    @endsection
+        </script>
+    @endsection --}}

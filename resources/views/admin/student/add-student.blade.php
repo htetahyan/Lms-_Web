@@ -87,7 +87,7 @@
                                             @enderror
                                         </label>
                                         <input class="form-control" value="{{ old('studentCode') }}" name="studentCode"
-                                            type="number" placeholder="Enter Parent Code">
+                                            type="text" placeholder="Enter Parent Code">
                                     </div>
                                 </div>
 

@@ -125,8 +125,8 @@
                     </div>
                     <div class="col-lg-8 bg-light p-5">
                         <div class="student-personals-grp">
-                            @if (count($students) != 0)
-                                @foreach ($students as $student)
+                            @if ($parent->students->count()!= 0)
+                                @foreach ($parent->students as $student)
                                     <div class="card mb-2">
                                         <div class="card-body">
                                             <div class="heading-detail">
